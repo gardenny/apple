@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+  word-wrap: break-word;
+}
+body {
+  background-color: white;
+  overflow-x: hidden;
+  color: var(--color-black);
+  letter-spacing: -0.05em;
+  -webkit-font-smoothing: antialiased;
+}
+ul,
+li {
+  list-style: none;
+}
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+p {
+  line-height: 1.6;
+}
