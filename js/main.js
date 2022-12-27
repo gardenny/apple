@@ -511,26 +511,31 @@
   }
 
   window.addEventListener('load', () => {
+    document.body.classList.remove('before-load');
     setLayout();
     sceneInfo[0].objs.ctx.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
-  });
 
-  window.addEventListener('scroll', () => {
-    scrollY = window.scrollY;
-    scrollLoop();
-    checkMenu();
+    window.addEventListener('scroll', () => {
+      scrollY = window.scrollY;
+      scrollLoop();
+      checkMenu();
 
-    if (!rafState) {
-      rafId = requestAnimationFrame(loop);
-      rafState = true;
-    }
-  });
+      if (!rafState) {
+        rafId = requestAnimationFrame(loop);
+        rafState = true;
+      }
+    });
 
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 900) setLayout();
-    sceneInfo[3].values.rectStartY = 0; // window resize 시 흰색 박스의 시작 지점 초기화
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) setLayout();
+      sceneInfo[3].values.rectStartY = 0; // window resize 시 흰색 박스의 시작 지점 초기화
+    });
+    window.addEventListener('orientationchange', setLayout);
+
+    document.querySelector('.loading').addEventListener('transitionend', e => {
+      document.body.removeChild(e.currentTarget); // loading의 opacity transition이 끝나면 삭제
+    });
   });
-  window.addEventListener('orientationchange', setLayout);
 
   setCanvasImages();
 })();
