@@ -8,6 +8,11 @@
   let currentScene = 0; // 현재 활성화된(스크롤 중인) 섹션
   let enterNewScene = false; // 새로운 섹션에 진입하는 순간 true
 
+  let accel = 0.1; // 이동 거리 (가속도 역할)
+  let delayedScrollY = 0; // 현재 지점
+  let rafId;
+  let rafState;
+
   const sceneInfo = [
     {
       // 0
@@ -227,9 +232,9 @@
     // 전달한 값들을 토대로 calcValues에서 계산 후, 계산된 값을 css style에 적용
     switch (currentScene) {
       case 0:
-        // console.log('1 play');
-        let sequence1 = Math.round(calcValues(values.imageSequence, currentScrollY));
-        objs.ctx.drawImage(objs.videoImages[sequence1], 0, 0);
+        // console.log('0 play');
+        // let sequence1 = Math.round(calcValues(values.imageSequence, currentScrollY));
+        // objs.ctx.drawImage(objs.videoImages[sequence1], 0, 0);
         objs.canvas.style.opacity = calcValues(values.canvas_opacity, currentScrollY);
 
         if (scrollRatio <= 0.22) {
@@ -274,8 +279,8 @@
         break;
       case 2:
         // console.log('2 play');
-        let sequence2 = Math.round(calcValues(values.imageSequence, currentScrollY));
-        objs.ctx.drawImage(objs.videoImages[sequence2], 0, 0);
+        // let sequence2 = Math.round(calcValues(values.imageSequence, currentScrollY));
+        // objs.ctx.drawImage(objs.videoImages[sequence2], 0, 0);
 
         if (scrollRatio <= 0.5) {
           // in
@@ -456,33 +461,65 @@
   // 몇 번째 섹션이 스크롤 중인지를 판별
   function scrollLoop() {
     enterNewScene = false;
-    // 현재 위치를 기준으로, 이전에 위치한 섹션들의 높이값
-    prevScrollHeight = 0;
+    prevScrollHeight = 0; // 현재 위치를 기준으로, 이전에 위치한 섹션들의 높이값
     for (let i = 0; i < currentScene; i++) {
       prevScrollHeight += sceneInfo[i].scrollHeight;
     }
     // console.log(prevScrollHeight);
 
     // 현재 스크롤값이 이전 섹션들의 높이값과 현재 활성화된 섹션의 높이값의 합보다 크다면 currentScene + 1
-    if (scrollY > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
+    if (delayedScrollY > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
       enterNewScene = true;
       currentScene++;
       document.body.setAttribute('id', `show-scene-${currentScene}`);
-    } else if (scrollY < prevScrollHeight) {
+    } else if (delayedScrollY < prevScrollHeight) {
       enterNewScene = true;
       if (currentScene === 0) return;
       currentScene--;
       document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
     // console.log(currentScene);
+
     if (enterNewScene) return; // 새로운 섹션에 진입한 찰나의 순간에만 애니메이션 막아줌 (오차 방지)
     playAnimation();
+  }
+
+  function loop() {
+    // 현재 지점 + (목표 지점 - 현재 지점) * 이동 거리
+    delayedScrollY = delayedScrollY + (scrollY - delayedScrollY) * accel;
+
+    // 새로운 scene에 진입했을 때의 requestAnimationFrame 계산 오차 방지
+    if (!enterNewScene) {
+      if (currentScene === 0 || currentScene === 2) {
+        const currentScrollY = delayedScrollY - prevScrollHeight; // 가속도가 적용된 delayedScrollY를 사용하여 스크롤을 부드럽게
+        const objs = sceneInfo[currentScene].objs;
+        const values = sceneInfo[currentScene].values;
+
+        let sequence = Math.round(calcValues(values.imageSequence, currentScrollY));
+        if (objs.videoImages[sequence]) {
+          objs.ctx.drawImage(objs.videoImages[sequence], 0, 0);
+        }
+      }
+    }
+    rafId = requestAnimationFrame(loop);
+
+    // 현재 지점이 목표 지점을 넘어버린다면
+    // 음수가 나올 수 있기 때문에 Math.abs를 통해 절대값으로 제어
+    if (Math.abs(scrollY - delayedScrollY) < 1) {
+      cancelAnimationFrame(rafId);
+      rafState = false;
+    }
   }
 
   window.addEventListener('scroll', () => {
     scrollY = window.scrollY;
     scrollLoop();
     checkMenu();
+
+    if (!rafState) {
+      rafId = requestAnimationFrame(loop);
+      rafState = true;
+    }
   });
   window.addEventListener('load', () => {
     setLayout();
