@@ -147,6 +147,15 @@
   }
   setCanvasImages();
 
+  function checkMenu() {
+    const globalNavHegiht = document.querySelector('.global-nav').getBoundingClientRect().height;
+    if (scrollY > globalNavHegiht) {
+      document.body.classList.add('local-nav-sticky');
+    } else {
+      document.body.classList.remove('local-nav-sticky');
+    }
+  }
+
   function setLayout() {
     // 각 스크롤 섹션의 높이를 미리 지정해둔 배수값 만큼 세팅
     sceneInfo.forEach(scene => {
@@ -473,6 +482,7 @@
   window.addEventListener('scroll', () => {
     scrollY = window.scrollY;
     scrollLoop();
+    checkMenu();
   });
   window.addEventListener('load', () => {
     setLayout();
