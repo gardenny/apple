@@ -108,13 +108,17 @@
         canvasCaption: document.querySelector('.canvas-caption'),
         canvas: document.querySelector('.image-blend-canvas'),
         ctx: document.querySelector('.image-blend-canvas').getContext('2d'),
-        imagesPath: ['./img/blend-image-1.jpg', './img/blend-image-2.jpg'],
+        imagesPath: ['img/blend-image-1.jpg', 'img/blend-image-2.jpg'],
         images: [],
       },
       values: {
         rect1X: [0, 0, { start: 0, end: 0 }],
         rect2X: [0, 0, { start: 0, end: 0 }],
         rectStartY: 0,
+        blendHeight: [0, 0, { start: 0, end: 0 }],
+        canvas_scale: [0, 0, { start: 0, end: 0 }],
+        canvasCaption_opacity: [0, 1, { start: 0, end: 0 }],
+        canvasCaption_translateY: [20, 0, { start: 0, end: 0 }],
       },
     },
   ];
@@ -342,7 +346,7 @@
         // 가로 세로 모두 꽉 차게 하기 위해 여기서 세팅 (게산 필요)
         const widthRatio = window.innerWidth / objs.canvas.width;
         const heightRatio = window.innerHeight / objs.canvas.height;
-        let canvasScaleRatio;
+        let canvasScaleRatio; // 캔버스 scale 조정 비율
 
         if (widthRatio <= heightRatio) {
           // 캔버스보다 브라우저 창이 홀쭉한 경우
@@ -363,7 +367,6 @@
         // console.log(recalculatedInnerWidth, recalculatedInnerHeight);
 
         // 섹션 3이 시작되었을 때의 흰색 박스 y값을 최초 1회만 할당
-        const canvasHeight = objs.canvas.hegiht;
         if (!values.rectStartY) {
           values.rectStartY = objs.canvas.offsetTop + (objs.canvas.height - objs.canvas.height * canvasScaleRatio) / 2;
           // console.log(values.rectStartY);
@@ -386,12 +389,56 @@
 
         // 캔버스가 브라우저 상단에 닿지 않았다면
         if (scrollRatio < values.rect1X[2].end) {
+          // console.log('캔버스 닿기 전');
           step = 1;
           objs.canvas.classList.remove('sticky');
         } else {
+          // console.log('캔버스 닿은 후');
           step = 2;
           objs.canvas.classList.add('sticky');
           objs.canvas.style.top = `${-(objs.canvas.height - objs.canvas.height * canvasScaleRatio) / 2}px`;
+
+          // 이미지 블렌드
+          // 3-1 애니메이션 종료 지점 === 3-2 애니메이션 시작 지점
+          values.blendHeight[0] = 0;
+          values.blendHeight[1] = objs.canvas.height;
+          values.blendHeight[2].start = values.rect1X[2].end; // step2가 되는 순간 이미지 블렌드 시작
+          values.blendHeight[2].end = values.blendHeight[2].start + 0.2; // 이미지 블렌드 시작 후, 전체 구간의 20% 동안 애니메이션이 이뤄진 다음 종료
+          const blendHeight = parseInt(calcValues(values.blendHeight, currentScrollY));
+          // console.log(blendHeight);
+
+          // prettier-ignore
+          // 캔버스 높이 - 스크롤값에 따라 새로 그려지는 이미지의 높이 = 이미지의 실시간 y 좌표
+          objs.ctx.drawImage(objs.images[1],
+            0, objs.canvas.height - blendHeight, objs.canvas.width, blendHeight,
+            0, objs.canvas.height - blendHeight, objs.canvas.width, blendHeight,
+          );
+
+          // 이미지 블렌드 종료 후
+          if (scrollRatio > values.blendHeight[2].end) {
+            values.canvas_scale[0] = canvasScaleRatio;
+            // 분수이므로 분모의 값을 증가시켜서 결과값이 더 작게 나오도록 만들어줌
+            values.canvas_scale[1] = document.body.offsetWidth / (objs.canvas.width * 1.5);
+            values.canvas_scale[2].start = values.blendHeight[2].end;
+            values.canvas_scale[2].end = values.canvas_scale[2].start + 0.2; // 0.2 === animation duration
+
+            objs.canvas.style.transform = `scale(${calcValues(values.canvas_scale, currentScrollY)})`;
+            objs.canvas.style.marginTop = 0; // position: fixed인 상태로 스크롤하는 동안에는 margin 적용되지 않게끔
+          }
+
+          // 캔버스 축소 종료 후
+          if (scrollRatio > values.canvas_scale[2].end && values.canvas_scale[2].end > 0) {
+            objs.canvas.classList.remove('sticky');
+            objs.canvas.style.marginTop = `${scrollHeight * 0.4}px`; // position: fixed인 상태에서 스크롤한 값만큼 margin-top 적용
+
+            values.canvasCaption_opacity[2].start = values.canvas_scale[2].end;
+            values.canvasCaption_opacity[2].end = values.canvasCaption_opacity[2].start + 0.1;
+            values.canvasCaption_translateY[2].start = values.canvasCaption_opacity[2].start;
+            values.canvasCaption_translateY[2].end = values.canvasCaption_opacity[2].end;
+
+            objs.canvasCaption.style.opacity = calcValues(values.canvasCaption_opacity, currentScrollY);
+            objs.canvasCaption.style.transform = `translate3d(0, ${calcValues(values.canvasCaption_translateY, currentScrollY)}%, 0)`;
+          }
         }
         break;
     }
