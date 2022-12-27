@@ -150,7 +150,6 @@
       sceneInfo[3].objs.images.push(imgElem3);
     }
   }
-  setCanvasImages();
 
   function checkMenu() {
     const globalNavHegiht = document.querySelector('.global-nav').getBoundingClientRect().height;
@@ -511,6 +510,11 @@
     }
   }
 
+  window.addEventListener('load', () => {
+    setLayout();
+    sceneInfo[0].objs.ctx.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+  });
+
   window.addEventListener('scroll', () => {
     scrollY = window.scrollY;
     scrollLoop();
@@ -521,9 +525,12 @@
       rafState = true;
     }
   });
-  window.addEventListener('load', () => {
-    setLayout();
-    sceneInfo[0].objs.ctx.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) setLayout();
+    sceneInfo[3].values.rectStartY = 0; // window resize 시 흰색 박스의 시작 지점 초기화
   });
-  window.addEventListener('resize', setLayout);
+  window.addEventListener('orientationchange', setLayout);
+
+  setCanvasImages();
 })();
