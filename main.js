@@ -30,26 +30,34 @@
         videoImages: [], // 비디오 프레임(이미지 시퀀스)을 담을 배열
       },
       values: {
+        // canvas Images
         videoImageCount: 109,
         imageSequence: [0, 108],
-
         // 애니메이션 초기값, 종료값, { 시작 지점, 종료 지점 }
         canvas_opacity: [1, 0, { start: 0.9, end: 1 }],
+
+        // messageA
         messageA_opacity_in: [0, 1, { start: 0.1, end: 0.2 }],
-        messageB_opacity_in: [0, 1, { start: 0.3, end: 0.4 }],
-        messageC_opacity_in: [0, 1, { start: 0.5, end: 0.6 }],
-        messageD_opacity_in: [0, 1, { start: 0.7, end: 0.8 }],
-        messageA_translateY_in: [20, 0, { start: 0.1, end: 0.2 }],
-        messageB_translateY_in: [20, 0, { start: 0.3, end: 0.4 }],
-        messageC_translateY_in: [20, 0, { start: 0.5, end: 0.6 }],
-        messageD_translateY_in: [20, 0, { start: 0.7, end: 0.8 }],
         messageA_opacity_out: [1, 0, { start: 0.25, end: 0.3 }],
-        messageB_opacity_out: [1, 0, { start: 0.45, end: 0.5 }],
-        messageC_opacity_out: [1, 0, { start: 0.65, end: 0.7 }],
-        messageD_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
+        messageA_translateY_in: [20, 0, { start: 0.1, end: 0.2 }],
         messageA_translateY_out: [0, -20, { start: 0.25, end: 0.3 }],
+
+        // messageB
+        messageB_opacity_in: [0, 1, { start: 0.3, end: 0.4 }],
+        messageB_opacity_out: [1, 0, { start: 0.45, end: 0.5 }],
+        messageB_translateY_in: [20, 0, { start: 0.3, end: 0.4 }],
         messageB_translateY_out: [0, -20, { start: 0.45, end: 0.5 }],
+
+        // messageC
+        messageC_opacity_in: [0, 1, { start: 0.5, end: 0.6 }],
+        messageC_opacity_out: [1, 0, { start: 0.65, end: 0.7 }],
+        messageC_translateY_in: [20, 0, { start: 0.5, end: 0.6 }],
         messageC_translateY_out: [0, -20, { start: 0.65, end: 0.7 }],
+
+        // messageD
+        messageD_opacity_in: [0, 1, { start: 0.7, end: 0.8 }],
+        messageD_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
+        messageD_translateY_in: [20, 0, { start: 0.7, end: 0.8 }],
         messageD_translateY_out: [0, -20, { start: 0.85, end: 0.9 }],
       },
     },
@@ -79,28 +87,35 @@
         videoImages: [],
       },
       values: {
+        // canvas Images
         videoImageCount: 251,
         imageSequence: [0, 250],
         canvas_opacity_in: [0, 1, { start: 0, end: 0.1 }],
         canvas_opacity_out: [1, 0, { start: 0.95, end: 1 }],
-        messageA_translateY_in: [20, 0, { start: 0.15, end: 0.2 }],
-        messageB_translateY_in: [30, 0, { start: 0.5, end: 0.55 }],
-        messageC_translateY_in: [30, 0, { start: 0.72, end: 0.77 }],
-        messageA_opacity_in: [0, 1, { start: 0.15, end: 0.2 }],
-        messageB_opacity_in: [0, 1, { start: 0.5, end: 0.55 }],
-        messageC_opacity_in: [0, 1, { start: 0.72, end: 0.77 }],
-        messageA_translateY_out: [0, -20, { start: 0.3, end: 0.35 }],
-        messageB_translateY_out: [0, -20, { start: 0.58, end: 0.63 }],
-        messageC_translateY_out: [0, -20, { start: 0.85, end: 0.9 }],
-        messageA_opacity_out: [1, 0, { start: 0.3, end: 0.35 }],
-        messageB_opacity_out: [1, 0, { start: 0.58, end: 0.63 }],
-        messageC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
-        pinB_scaleY: [0.5, 1, { start: 0.5, end: 0.55 }],
-        pinC_scaleY: [0.5, 1, { start: 0.72, end: 0.77 }],
-        pinB_opacity_in: [0, 1, { start: 0.5, end: 0.55 }],
-        pinC_opacity_in: [0, 1, { start: 0.72, end: 0.77 }],
-        pinB_opacity_out: [1, 0, { start: 0.58, end: 0.63 }],
-        pinC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
+
+        // messageA
+        messageA_opacity_in: [0, 1, { start: 0.05, end: 0.15 }],
+        messageA_opacity_out: [1, 0, { start: 0.2, end: 0.3 }],
+        messageA_translateY_in: [20, 0, { start: 0.05, end: 0.15 }],
+        messageA_translateY_out: [0, -20, { start: 0.2, end: 0.3 }],
+
+        // messageB
+        messageB_opacity_in: [0, 1, { start: 0.47, end: 0.55 }],
+        messageB_opacity_out: [1, 0, { start: 0.6, end: 0.65 }],
+        messageB_translateY_in: [20, 0, { start: 0.47, end: 0.55 }],
+        messageB_translateY_out: [0, -20, { start: 0.6, end: 0.65 }],
+        pinB_scaleY: [0.5, 1, { start: 0.47, end: 0.65 }],
+        pinB_opacity_in: [0, 1, { start: 0.47, end: 0.55 }],
+        pinB_opacity_out: [1, 0, { start: 0.6, end: 0.65 }],
+
+        // messageC
+        messageC_opacity_in: [0, 1, { start: 0.65, end: 0.67 }],
+        messageC_opacity_out: [1, 0, { start: 0.75, end: 0.8 }],
+        messageC_translateY_in: [20, 0, { start: 0.65, end: 0.67 }],
+        messageC_translateY_out: [0, -20, { start: 0.75, end: 0.8 }],
+        pinC_scaleY: [0.5, 1, { start: 0.65, end: 0.8 }],
+        pinC_opacity_in: [0, 1, { start: 0.65, end: 0.67 }],
+        pinC_opacity_out: [1, 0, { start: 0.75, end: 0.8 }],
       },
     },
     {
@@ -293,7 +308,7 @@
           // out
           objs.canvas.style.opacity = calcValues(values.canvas_opacity_out, currentScrollY);
         }
-        if (scrollRatio <= 0.25) {
+        if (scrollRatio <= 0.17) {
           // in
           objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentScrollY);
           objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentScrollY)}%, 0)`;
@@ -315,7 +330,7 @@
           objs.pinB.style.transform = `scaleY(${calcValues(values.pinB_scaleY, currentScrollY)})`;
         }
 
-        if (scrollRatio <= 0.83) {
+        if (scrollRatio <= 0.73) {
           // in
           objs.messageC.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_in, currentScrollY)}%, 0)`;
           objs.messageC.style.opacity = calcValues(values.messageC_opacity_in, currentScrollY);
@@ -340,20 +355,20 @@
           } else {
             canvasScaleRatio = widthRatio;
           }
-          objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
+          objs.canvas.style.transform = `scale(${canvasScaleRatio + 0.03})`;
           objs.ctx.drawImage(objs.images[0], 0, 0);
 
           const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
           const recalculatedInnerHeight = document.body.offsetHeight / canvasScaleRatio;
 
-          const whiteRectWidth = recalculatedInnerWidth * 0.15;
+          const blackRectWidth = recalculatedInnerWidth * 0.15;
           values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
-          values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
-          values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
-          values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
+          values.rect1X[1] = values.rect1X[0] - blackRectWidth;
+          values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - blackRectWidth;
+          values.rect2X[1] = values.rect2X[0] + blackRectWidth;
 
-          objs.ctx.fillRect(parseInt(values.rect1X[0]), 0, parseInt(whiteRectWidth), objs.canvas.height);
-          objs.ctx.fillRect(parseInt(values.rect2X[0]), 0, parseInt(whiteRectWidth), objs.canvas.height);
+          objs.ctx.fillRect(parseInt(values.rect1X[0]), 0, parseInt(blackRectWidth), objs.canvas.height);
+          objs.ctx.fillRect(parseInt(values.rect2X[0]), 0, parseInt(blackRectWidth), objs.canvas.height);
         }
         break;
       case 3:
@@ -371,18 +386,18 @@
         } else {
           canvasScaleRatio = widthRatio;
         }
-        objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
+        objs.canvas.style.transform = `scale(${canvasScaleRatio + 0.03})`;
         objs.ctx.drawImage(objs.images[0], 0, 0);
 
         // 캔버스 비율에 맞춰서 innerWidth, innerHeight 다시 계산
         // 캔버스 비율(scale값)을 브라우저 비율에 맞춰서 줄여놓았으므로
-        // 흰색 박스가 줄어든 캔버스의 양쪽에서 정확하게 시작할 수 있도록 하기 위함
+        // 좌우 검은 박스가 줄어든 캔버스의 양쪽에서 정확하게 시작할 수 있도록 하기 위함
         // 스크롤바의 영향을 받지 않도록 window.inner~ 대신 document.body.offset~ 사용
         const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
         const recalculatedInnerHeight = document.body.offsetHeight / canvasScaleRatio;
         // console.log(recalculatedInnerWidth, recalculatedInnerHeight);
 
-        // 섹션 3이 시작되었을 때의 흰색 박스 y값을 최초 1회만 할당
+        // 섹션 3이 시작되었을 때의 좌우 박스의 y값을 최초 1회만 할당
         if (!values.rectStartY) {
           values.rectStartY = objs.canvas.offsetTop + (objs.canvas.height - objs.canvas.height * canvasScaleRatio) / 2;
           // console.log(values.rectStartY);
@@ -392,16 +407,16 @@
           values.rect2X[2].end = values.rectStartY / scrollHeight;
         }
 
-        // 흰색 박스 좌표 세팅
-        const whiteRectWidth = recalculatedInnerWidth * 0.15;
-        values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2; // 흰색 박스가 화면에 처음 그려지는 시작점, 첫 x 좌표
-        values.rect1X[1] = values.rect1X[0] - whiteRectWidth; // 브라우저가 스크롤 되어 흰색 박스가 화면 밖으로 완전히 나갔을 때의 최종 x 좌표
-        values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
-        values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
+        // 좌우 검은 박스 좌표 세팅
+        const blackRectWidth = recalculatedInnerWidth * 0.15;
+        values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2; // 박스가 화면에 처음 그려지는 시작점, 첫 x 좌표
+        values.rect1X[1] = values.rect1X[0] - blackRectWidth; // 브라우저가 스크롤 되어 박스가 화면 밖으로 완전히 나갔을 때의 최종 x 좌표
+        values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - blackRectWidth;
+        values.rect2X[1] = values.rect2X[0] + blackRectWidth;
 
-        // 좌우 흰색 박스 그리기
-        objs.ctx.fillRect(parseInt(calcValues(values.rect1X, currentScrollY)), 0, parseInt(whiteRectWidth), objs.canvas.height);
-        objs.ctx.fillRect(parseInt(calcValues(values.rect2X, currentScrollY)), 0, parseInt(whiteRectWidth), objs.canvas.height);
+        // 박스 그리기
+        objs.ctx.fillRect(parseInt(calcValues(values.rect1X, currentScrollY)), 0, parseInt(blackRectWidth), objs.canvas.height);
+        objs.ctx.fillRect(parseInt(calcValues(values.rect2X, currentScrollY)), 0, parseInt(blackRectWidth), objs.canvas.height);
 
         // 캔버스가 브라우저 상단에 닿지 않았다면
         if (scrollRatio < values.rect1X[2].end) {
@@ -468,9 +483,6 @@
       prevScrollHeight += sceneInfo[i].scrollHeight;
     }
     // console.log(prevScrollHeight);
-    if (delayedScrollY < prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
-      document.body.classList.remove('scroll-effect-end');
-    }
 
     // 현재 스크롤값이 이전 섹션들의 높이값과 현재 활성화된 섹션의 높이값의 합보다 크다면 currentScene + 1
     if (delayedScrollY > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
@@ -478,9 +490,6 @@
 
       if (currentScene < sceneInfo.length - 1) {
         currentScene++;
-      }
-      if (currentScene === sceneInfo.length - 1) {
-        document.body.classList.add('scroll-effect-end');
       }
 
       document.body.setAttribute('id', `show-scene-${currentScene}`);

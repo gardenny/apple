@@ -12,6 +12,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: var(--color-dark-white);
 }
 html {
   font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
@@ -21,12 +22,17 @@ html {
 body {
   background-color: #000;
   overflow-x: hidden;
-  color: var(--color-black);
   letter-spacing: -0.05em;
   user-select: none;
 }
+body.before-load {
+  overflow: hidden;
+}
 li {
   list-style: none;
+}
+a {
+  text-decoration: none;
 }
 img {
   max-width: 100%;
@@ -36,15 +42,7 @@ p {
   line-height: 1.6;
 }
 
-body {
-  background: #000;
-  color: var(--color-dark-white);
-}
-body.before-load {
-  overflow: hidden;
-}
-
-/* Styling */
+/* Container */
 .container {
   /* iPhone 가로 스크롤 방지 */
   overflow-x: hidden;
@@ -57,18 +55,36 @@ body.before-load {
   top: 0;
   left: 0;
   width: 100%;
-  height: 44px;
+  height: 48px;
+  background: #121212;
   padding: 0 1rem;
+}
+.global-nav-item {
+  display: none;
+}
+.global-nav-logo,
+.global-nav-cart {
+  height: 48px;
+  text-indent: -9999px;
+}
+.global-nav-logo {
+  display: block;
+  width: 17px;
+  background: url(img/apple-logo.svg) no-repeat center / 17px 44px;
+}
+.global-nav-cart {
+  width: 13px;
+  background: url(img/nav-cart.svg) no-repeat center / 13px 44px;
 }
 .local-nav {
   position: absolute;
   z-index: 11;
-  top: 44px;
+  top: 48px;
   left: 0;
   width: 100%;
   height: 52px;
   padding: 0 1rem;
-  border-bottom: 1px solid #ddd;
+  transition: background 300ms;
 }
 .local-nav-sticky .local-nav {
   position: fixed;
@@ -108,22 +124,19 @@ body.before-load {
 #scroll-section-0 {
   text-align: center;
 }
-.scroll-image {
-  transform: translateY(-55%);
-}
 .scroll-heading {
   position: relative;
   top: -10vh;
   z-index: 5;
-  font-size: 4rem;
+  font-size: 5rem;
   text-align: center;
 }
 .main-message {
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 35vh;
-  font-size: 2.5rem;
+  top: 40vh;
+  font-size: 3rem;
   height: 3em;
   margin: 5px 0;
   opacity: 0;
@@ -135,6 +148,9 @@ body.before-load {
 }
 
 /* 1 */
+#scroll-section-1 {
+  text-align: center;
+}
 .description {
   max-width: 1000px;
   margin: auto;
@@ -142,15 +158,36 @@ body.before-load {
   font-size: 1.2rem;
   padding: 0 1em;
 }
-.description strong {
-  float: left;
-  margin: 0.2em;
+.normal-heading {
+  background: -webkit-linear-gradient(0deg, #be22ff 20%, #ff279c 50%, #ff981f 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-size: 3rem;
+  margin-bottom: 1.5em;
+}
+.normal-description {
+  margin: 1em 0 3em;
 }
 
 /* 2 */
+#scroll-section-2 {
+  padding-top: 20vh;
+}
+.normal-elem {
+  text-align: center;
+  font-size: 2rem;
+  line-height: 1.6;
+}
+.normal-image {
+  width: 100%;
+  max-width: 600px;
+}
+#scroll-section-2 .normal-heading {
+  margin: 0;
+}
 #scroll-section-2 .main-message {
-  font-size: 3.5rem;
+  font-size: 3rem;
 }
 .main-message small {
   display: block;
@@ -168,11 +205,12 @@ body.before-load {
 }
 .sticky-elem.desc-message.c {
   top: 15%;
-  left: 45%;
+  left: 40%;
 }
 .pin {
   width: 1px;
   height: 100px;
+  background-color: #fff;
 }
 
 /* 3 */
@@ -180,6 +218,7 @@ body.before-load {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 .mid-message {
   max-width: 1000px;
@@ -204,9 +243,6 @@ body.before-load {
   display: block;
   will-change: transform, opacity;
 }
-.scroll-effect-end .sticky-elem {
-  display: none !important;
-}
 .sticky-elem {
   display: none;
   position: fixed;
@@ -223,6 +259,9 @@ body.before-load {
   top: 50%;
   left: 50%;
 }
+.sticky-elem.desc-message {
+  font-size: 1.5rem;
+}
 .image-blend-canvas.sticky {
   position: fixed;
   top: 0;
@@ -238,6 +277,7 @@ body.before-load {
   display: flex;
   justify-content: center;
   align-items: center;
+  column-gap: 1rem;
   height: 7rem;
   background: var(--color-dark-black);
   color: #fff;
@@ -297,6 +337,14 @@ body.before-load {
 
 /* Responsive */
 @media screen and (min-width: 1024px) {
+  /* Nav */
+  .global-nav-trigger {
+    display: none;
+  }
+  .global-nav-item {
+    display: block;
+  }
+
   /* 0 */
   .scroll-heading {
     font-size: 10vw;
@@ -315,15 +363,23 @@ body.before-load {
   }
 
   /* 2 */
+  .normal-heading {
+    font-size: 4vw;
+  }
   #scroll-section-2 .main-message {
     font-size: 6vw;
   }
+  .sticky-elem.desc-message {
+    font-size: 2rem;
+  }
   .sticky-elem.desc-message.b {
     top: 20%;
-    left: 53%;
+    left: 40%;
   }
   .sticky-elem.desc-message.c {
-    left: 48%;
+    top: 20%;
+    left: 25%;
+    font-size: 4vw;
   }
   .main-message small {
     font-size: 1.5vw;
@@ -336,10 +392,10 @@ body.before-load {
   .mid-message {
     width: 1000px;
     padding: 0;
+    margin-bottom: 10%;
     font-size: 4vw;
   }
   .canvas-caption {
-    padding: 0;
     font-size: 2rem;
     margin-top: -8rem;
   }
