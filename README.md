@@ -2,7 +2,7 @@
 
 # 🍎 Apple
 
-Apple iPad 제품 소개 페이지 👉 [Demo](https://imjone.github.io/apple/)
+Apple iPad 제품 소개 페이지 👉 [Demo](https://gardenny.github.io/apple/)
 
 <br />
 
@@ -36,7 +36,7 @@ Apple 웹사이트에서 자주 사용되는 고급 인터랙션 기법 클론 �
 
 ## 💻 소스 코드
 
-전체 코드 보러 가기 👉 [Notion](https://imjone.notion.site/Apple-ba7b279ed3c643eb88a3439cb004d3c3)
+전체 코드 보러 가기 👉 [Notion](https://imjone.notion.site/Apple-ba7b279ed3c643eb88a3439cb004d3c3?pvs=4)
 
 ### 📍 애니메이션 정보 객체 배열 정의
 
